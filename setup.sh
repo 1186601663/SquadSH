@@ -164,7 +164,7 @@ Install_MCSManager() {
   wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
   tar -zxf steamcmd_linux.tar.gz
   wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt
-  echo ./steamcmd.sh +runscript ./update_squad.txt
+  ./steamcmd.sh +runscript ./update_squad.txt
   sleep 3
 }
 

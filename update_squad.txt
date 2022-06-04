@@ -1,0 +1,10 @@
+// ->  "update_squad.txt" 开始 
+@ShutdownOnFailedCommand 1 // -> 如果一次更新多个服务器，则设置为 0 
+@NoPromptForPassword 1 // -> 在执行时禁用密码提示
+login anonymous // 公共匿名帐户 
+
+// -> 你的服务器实例
+app_update 403240 validate // // -> 更新Squad服务器并验证完整性
+
+// -> 脚本结束
+quit

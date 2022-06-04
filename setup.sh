@@ -158,13 +158,13 @@ Install_MCSManager() {
 
   # echo "[→] cd ${mcsmanager_install_path}"
   cd ${steamcmd_install_path} || exit
-
+  echo_cyan "[+] 安装 前置..."
   yum -y install glibc.i686 libstdc++.i686 screen libcurl.i686
-
+  echo_cyan "[+] 安装 SteamCmd..."
   wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz
-
   tar -zxf steamcmd_linux.tar.gz
-
+  wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt
+  echo ./steamcmd.sh +runscript ./update_squad.txt
   sleep 3
 }
 

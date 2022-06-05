@@ -164,10 +164,8 @@ Install_MCSManager() {
   
   wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt
   
-  ./steamcmd.sh
+  ./steamcmd.sh || exit
 
-  exit
-  
   cd ..
 
   # echo "[+] mkdir -p ${mcsmanager_install_path}"

@@ -149,22 +149,37 @@ Install_MCSManager() {
   fi
   
   cd ..
+  echo_cyan "[+] 安装 SteamCMD 相关依赖..."
   
   sudo yum update -y
   
+  echo_cyan "[+] 安装 Squad 相关依赖..."
+  
   sudo yum install glibc.i686 libstdc++.i686 libcurl4-gnutls-dev.i686 libcurl.i686 screen -y
   
-  rm -irf ${steamcmd_install_path}
+  echo_cyan "[+] 创建 本地SteamCMD服务端账户..."
   
-  mkdir -p ${steamcmd_install_path} || exit
+  name1=steamuser
   
-  cd ${steamcmd_install_path} || exit
+  read -p "创建账户$name1||输入SteamCMD密码：" passwd1
   
-  wget -q -O - https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar xzv
+  useradd $name1
   
-  wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt
+  echo "$passwd1" | passwd --stdin $name &> /dev/null
   
-  ./steamcmd.sh || exit
+  echo_cyan "本地SteamCMD服务端账户$name1创建完成"
+
+  su - $name1 -c rm -irf ${steamcmd_install_path}
+  
+  su - $name1 -c mkdir -p ${steamcmd_install_path} || exit
+  
+  su - $name1 -c cd ${steamcmd_install_path} || exit
+  
+  su - $name1 -c wget -q -O - https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar xzv
+  
+  su - $name1 -c wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt
+  
+  su - $name1 -c bash steamcmd.sh || exit
 
   cd ..
 
@@ -239,6 +254,8 @@ WantedBy=multi-user.target
     echo_cyan "启用 systemctl enable mcsm-{daemon,web}.service"
     echo_cyan "启动 systemctl start mcsm-{daemon,web}.service"
     echo_cyan "停止 systemctl stop mcsm-{daemon,web}.service"
+    echo_cyan "本地SteamCMD服务端账户名称:$name1"
+    echo_cyan "本地SteamCMD服务端账户密码:$passwd1"
   else
     echo_green "Welcome to MCSManager, you can access it by the following ways:"
     echo_yellow "=================================================================="

@@ -169,17 +169,17 @@ Install_MCSManager() {
   
   echo_cyan "本地SteamCMD服务端账户$name1创建完成"
 
-  su -c rm -irf ${steamcmd_install_path} $name1
+  su - $name1 -c "rm -irf ${steamcmd_install_path}"
   
- su -c mkdir -p ${steamcmd_install_path} || exit $name1
+  su - $name1 -c "mkdir -p ${steamcmd_install_path} || exit"
   
- su -c cd ${steamcmd_install_path} || exit $name1
+  su - $name1 -c "cd ${steamcmd_install_path} || exit"
   
- su -c wget -q -O - https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar xzv $name1
+  su - $name1 -c "wget -q -O - https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz | tar xzv"
   
- su -c wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt $name1
+  su - $name1 -c "wget https://raw.githubusercontent.com/1186601663/SquadSH/main/update_squad.txt"
   
- su -c  bash steamcmd.sh || exit $name1
+  su - $name1 -c "bash steamcmd.sh" || exit
 
   cd ..
 

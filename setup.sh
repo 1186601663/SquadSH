@@ -171,7 +171,7 @@ Install_MCSManager() {
 
   su - $name1 -c "rm -irf ${steamcmd_install_path}"
   
-  su - $name1 -c "mkdir -p ${steamcmd_install_path} || exit"
+  mkdir -p ${steamcmd_install_path} || exit
   
   su - $name1 -c "cd ${steamcmd_install_path} || exit"
   
